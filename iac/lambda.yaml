@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Function testing
+Transform: AWS::Serverless-2016-10-31
+Globals:
+  Function:
+    MemorySize: !Ref pFnMemory
+    Runtime: java11
+    Timeout: !Ref pFnTimeout
+    Tracing: Active
+Parameters:
+  pFnMemory:
+    Type: Number
+  pFnTimeout:
+    Type: Number
+Resources:
+  Fn:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: heeki.cloud.App::handleRequest
+      CodeUri: ../target/SampleFunction.jar
+Outputs:
+  oFn:
+    Value: !Ref Fn
